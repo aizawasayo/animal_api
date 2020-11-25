@@ -24,4 +24,4 @@ const commentSchema = new mongoose.Schema({
 
 const GuideComment = mongoose.model('Guide_Comment', commentSchema)
 
-export default GuideComment
+module.exports = GuideComment

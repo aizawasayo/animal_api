@@ -26,4 +26,4 @@ const tradeSchema = new mongoose.Schema({
 
 const Trade = mongoose.model('Trade', tradeSchema)
 
-export default Trade
+module.exports = Trade

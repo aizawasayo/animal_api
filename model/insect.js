@@ -71,4 +71,4 @@ async function createInsect() {
 }
 // createInsect();
 
-export default Insect
+module.exports = Insect

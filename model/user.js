@@ -113,7 +113,7 @@ const validateUser = (user) => {
 }
 
 // 将用户集合作为模块成员进行导出
-export {
+module.exports = {
     User, // 相当于 User: User，键值相等的情况
     validateUser,
 }

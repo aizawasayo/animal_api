@@ -32,4 +32,4 @@ const turnipSchema = new mongoose.Schema({
 
 const Turnip = mongoose.model('Turnip', turnipSchema)
 
-export default Turnip
+module.exports = Turnip

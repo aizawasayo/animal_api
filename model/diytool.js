@@ -19,4 +19,4 @@ const toolSchema = new mongoose.Schema({
 
 const Tool = mongoose.model('Diy_Tool', toolSchema)
 
-export default Tool
+module.exports = Tool

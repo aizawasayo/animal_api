@@ -28,4 +28,4 @@ const plantSchema = new mongoose.Schema({
 
 const Plant = mongoose.model('Plant', plantSchema)
 
-export default Plant
+module.exports = Plant

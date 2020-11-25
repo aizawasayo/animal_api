@@ -24,4 +24,4 @@ const fossilSchema = new mongoose.Schema({
 
 const Fossil = mongoose.model('Fossil', fossilSchema)
 
-export default Fossil
+module.exports = Fossil

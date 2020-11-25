@@ -25,4 +25,4 @@ const commentSchema = new mongoose.Schema({
 
 const BoardComment = mongoose.model('Board_Comment', commentSchema)
 
-export default BoardComment
+module.exports = BoardComment

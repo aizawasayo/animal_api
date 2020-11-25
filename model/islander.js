@@ -68,4 +68,4 @@ async function createIslander() {
 }
 // createIslander();
 
-export default Islander
+module.exports = Islander

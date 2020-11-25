@@ -24,4 +24,4 @@ const commentSchema = new mongoose.Schema({
 
 const TurnipComment = mongoose.model('Turnip_Comment', commentSchema)
 
-export default TurnipComment
+module.exports = TurnipComment

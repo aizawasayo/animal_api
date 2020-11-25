@@ -18,4 +18,4 @@ const boardSchema = new mongoose.Schema({
 
 const Board = mongoose.model('Board', boardSchema)
 
-export default Board
+module.exports = Board

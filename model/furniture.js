@@ -29,4 +29,4 @@ const furnitureSchema = new mongoose.Schema({
 
 const Furniture = mongoose.model('Furniture', furnitureSchema)
 
-export default Furniture
+module.exports = Furniture

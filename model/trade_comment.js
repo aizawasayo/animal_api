@@ -24,4 +24,4 @@ const commentSchema = new mongoose.Schema({
 
 const TradeComment = mongoose.model('Trade_Comment', commentSchema)
 
-export default TradeComment
+module.exports = TradeComment

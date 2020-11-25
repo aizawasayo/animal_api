@@ -31,4 +31,4 @@ const clothingSchema = new mongoose.Schema({
 
 const Clothing = mongoose.model('Clothing', clothingSchema)
 
-export default Clothing
+module.exports = Clothing

@@ -73,4 +73,4 @@ async function createFish() {
 }
 // createFish();
 
-export default Fish
+module.exports = Fish

@@ -27,4 +27,4 @@ const npcSchema = new mongoose.Schema({
 
 const Npc = mongoose.model('Npc', npcSchema)
 
-export default Npc
+module.exports = Npc

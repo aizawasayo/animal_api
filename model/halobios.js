@@ -48,4 +48,4 @@ const halobiosSchema = new mongoose.Schema({
 
 const Halobios = mongoose.model('Halobios', halobiosSchema)
 
-export default Halobios
+module.exports = Halobios
