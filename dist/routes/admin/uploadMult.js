@@ -33,7 +33,7 @@ var _default = function _default(req, res, next) {
     fileInfo.name = file.originalname; //fileInfo.size = file.size;
 
     fileInfo.path = '/' + targetPath;
-    fileInfo.url = "http://192.168.31.168:1016/" + targetPath;
+    fileInfo.url = "http://106.54.168.208:1016/" + targetPath;
     fileInfos.push(fileInfo);
   } // 设置响应类型及编码
 

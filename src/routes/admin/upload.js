@@ -18,7 +18,7 @@ export default (req, res, next) => {
 			"data": {
 				"name": targetName,
 				"path": '/' + targetPath,
-				"url": "http://192.168.31.168:1016/" + targetPath
+				"url": "http://106.54.168.208:1016/" + targetPath
 			},
 			message: '上传成功'
 		});
