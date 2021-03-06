@@ -1,4 +1,3 @@
-// 引进mongoose第三方模块
 const mongoose = require('mongoose')
 
 // 创建岛民集合规则
@@ -20,25 +19,16 @@ const islanderSchema = new mongoose.Schema({
     required: true,
   },
   birth: String,
-  monthStr: {
-    type: String,
-  },
-  updated_time: { // 更新时间
-    type: Number,
-    default: Date.now,
-  },
-  photoSrc: {
-    type: String,
-    default: null,
-  },
+  monthStr: String,
   character: String,
   subtype: String, // 性格亚型
+  voice: String,
+  hobby: String,
   petPhrase: String,
   motto: String,
   ideal: String,
   amiibo: String,
-  voice: String,
-  hobby: String,
+  photoSrc: String,
 })
 
 const Islander = mongoose.model('Islander', islanderSchema)

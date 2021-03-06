@@ -1,4 +1,3 @@
-// 引进mongoose第三方模块
 const mongoose = require('mongoose')
 
 // 创建DIY配方集合规则
@@ -9,19 +8,23 @@ const recipeSchema = new mongoose.Schema({
     minlength: 1,
     required: [true, '请填写名称'],
   },
-  itemInfo: {
+  furnitureInfo: { // 根据类型获取配方物品的信息，大部分字段无需重复录入，前期没有考虑到这个功能，暂时不展开了
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Furniture',
     // required: [true, '请传递工具名称']
   },
-  engName: {
-    type: String,
+  clothingInfo: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Clothing',
   },
-  jpnName: {
-    type: String,
+  toolInfo: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Tool',
   },
-  type: Array,
-  materials: Array, // 合成材料
+  engName: String,
+  jpnName: String,
+  type: { type: Array, required: true },
+  materials: { type: Array, required: true }, // 合成材料
   size: String, // 占地面积
   activity: String, // 所属活动
   season: String, // 所属季节
@@ -29,17 +32,8 @@ const recipeSchema = new mongoose.Schema({
   channelDetail: String, // 途径详情
   character: String, // 来源村民性格
   npc: String, // 来源npc
-  unlockCondition: { // 解锁DIY数量要求
-    type: String,
-  },
-  photoSrc: {
-    type: String,
-    default: null,
-  },
-  updated_time: { //更新时间
-    type: Number,
-    default: Date.now,
-  },
+  unlockCondition: String, // 解锁DIY数量要求
+  photoSrc: String,
 })
 
 const Recipe = mongoose.model('Recipe', recipeSchema)

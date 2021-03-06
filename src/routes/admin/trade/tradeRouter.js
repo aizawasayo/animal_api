@@ -1,5 +1,5 @@
-import express from 'express';
-const router = express.Router();
+import express from 'express'
+const router = express.Router()
 
 import trade from './trade'
 import tradeAdd from './trade-add'

@@ -1,5 +1,5 @@
-import express from 'express';
-const router = express.Router();
+import express from 'express'
+const router = express.Router()
 
 import user from './user'
 import userAdd from './user-add'

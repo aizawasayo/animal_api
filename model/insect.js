@@ -1,4 +1,3 @@
-// 引进mongoose第三方模块
 const mongoose = require('mongoose')
 
 // 创建昆虫集合规则
@@ -9,44 +8,23 @@ const insectSchema = new mongoose.Schema({
     minlength: 2,
     required: [true, '请填写名称'],
   },
-  engName: {
-    type: String,
-  },
-  jpnName: {
-    type: String,
-  },
-  price: {
-    type: Number,
-  },
+  engName: String,
+  jpnName: String,
+  price: Number,
   activeTime: {
     north: Array,
     south: Array
   },
   locale: Array, // 出现地点
-  period: { // 时间段
-    type: String,
-  },
+  period: String, // 时间段
   periodStart: String,
   periodEnd: String,
-  weatherCondition: { // 出现天气
-    type: String
-  },
+  weatherCondition: String, // 出现天气
   unlockCondition: String, // 解锁要求
   elseCondition: Array,
-  rarity: { // 稀有度
-    type: String,
-  },
-  introduction: {
-    type: String,
-  },
-  photoSrc: {
-    type: String,
-    default: null,
-  },
-  updated_time: { // 更新时间
-    type: Number,
-    default: Date.now,
-  },
+  rarity: String, // 稀有度
+  introduction: String,
+  photoSrc: String,
 })
 
 const Insect = mongoose.model('Insect', insectSchema)

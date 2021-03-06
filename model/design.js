@@ -11,13 +11,13 @@ const designSchema = new mongoose.Schema({
     ref: 'User',
     required: [true, '发布者不可为空']
   },
-  type: String, // 类型，图案/衣服/帽子
-  created_time: { // 新增时间
-    type: Number,
-    default: Date.now,
-  },
+  type: { type: String, required: true }, // 类型，图案/衣服/帽子
   content: String, // 简介
   photoSrc: Array, // 图片
+  created_time: { // 新增时间
+    type: Number,
+    maxlength: 10
+  },
 })
 
 const Design = mongoose.model('Design', designSchema)

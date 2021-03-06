@@ -2,24 +2,10 @@
 // import {
 //     join
 // } from 'path'
-import {
-    User
-} from '../../../../model/user'
+import { User } from '../../../../model/user'
+import getById from '../../common/getOne'
 
 export default async (req, res) => {
-    let id = req.params.id
-    let user = await User.findOne({
-        _id: id
-    });
-    // console.log(islander)
-    if (!user) return res.json({
-        code: 400,
-        message: '查询失败'
-    })
-    res.json({
-        code: 200,
-        message: '查询成功',
-        data: user
-    })
-    //});
+	const response = await getById(req.params.id, User)
+  res.json(response) 
 }

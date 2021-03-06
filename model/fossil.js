@@ -1,4 +1,3 @@
-// 引进mongoose第三方模块
 const mongoose = require('mongoose')
 
 const fossilSchema = new mongoose.Schema({
@@ -12,14 +11,7 @@ const fossilSchema = new mongoose.Schema({
   jpnName: String,
   price: Number,
   introduction: String,
-  photoSrc: {
-    type: String,
-    default: null,
-  },
-  updated_time: { // 更新时间
-    type: Number,
-    default: Date.now,
-  },
+  photoSrc: String,
 })
 
 const Fossil = mongoose.model('Fossil', fossilSchema)

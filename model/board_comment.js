@@ -12,15 +12,18 @@ const commentSchema = new mongoose.Schema({
     ref: 'User',
     required:  [true, '用户id不可为空']
   },
-  created_time: {
-    type: Number,
-    default: Date.now,
+  content: {
+    type: String,
+    required: true
   },
-  content: String,
   like: { // 点赞数
     type: Number,
     default: 0
-  } 
+  },
+  created_time: {
+    type: Number,
+    maxlength: 10
+  }, 
 })
 
 const BoardComment = mongoose.model('Board_Comment', commentSchema)

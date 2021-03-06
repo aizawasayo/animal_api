@@ -1,4 +1,3 @@
-// 引进mongoose第三方模块
 const mongoose = require('mongoose')
 
 // 家具集合规则
@@ -12,7 +11,7 @@ const furnitureSchema = new mongoose.Schema({
   engName: String,
   jpnName: String,
   price: Number,
-  type: Array,
+  type: { type: Array, required: true },
   remould: String, // 能否改造
   orderType: String, // 订购类型
   size: String, // 大小，占地面积
@@ -21,10 +20,6 @@ const furnitureSchema = new mongoose.Schema({
   activity: String,
   channelDetail: String, // 获取途径详情
   photoSrc: Array,
-  updated_time: { // 更新时间
-    type: Number,
-    default: Date.now,
-  },
 })
 
 const Furniture = mongoose.model('Furniture', furnitureSchema)

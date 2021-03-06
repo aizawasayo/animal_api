@@ -1,6 +1,5 @@
-import {
-  User
-} from '../../../../model/user'
+import { User } from '../../../../model/user'
+import getList from '../../common/getList'
 
 export default async (req, res) => {
   const {
@@ -8,20 +7,12 @@ export default async (req, res) => {
     pageSize,
     query,
     sort,
-    username,
-    nickname,
     position,
-    role,
+    roles,
     state,
   } = req.query
 
-  let limit = parseInt(pageSize)
-  let skip = (page - 1) * limit
-
-  let sortCondition = { //默认筛选条件为名字
-    name: 1
-  }
-  let nameReg = new RegExp(query.trim(), 'i')
+  const nameReg = new RegExp(query.trim(), 'i')
   let condition = {
     $or: [ //多条件，数组
       {
@@ -36,36 +27,20 @@ export default async (req, res) => {
       }
     ]
   }
-  if (position) {
-    condition['position'] = position
+  if (position) condition['position'] = position
+  if (roles) condition['roles'] = roles
+  if (state) condition['state'] = state
+  let sortCondition = { 
+    name: 1
   }
-  if (role) {
-    condition['role'] = role
-  }
-  if (state) {
-    condition['state'] = state
-  }
+  if (sort) sortCondition = JSON.parse(sort)
 
-  if (sort) {
-    sortCondition = JSON.parse(sort)
-  }
-  //查询用户数据的总数
-  let count = await User.countDocuments(condition)
-
-  //总页数
-  let total = Math.ceil(count / pageSize)
-
-  //将用户信息从数据库中查询出来
-  let users = await User.find(condition).skip(skip).limit(limit).sort(sortCondition).collation({
-    locale: 'zh'
-  }).exec()
-
-  //渲染用户列表模版
-  res.json({
-    code: 200,
-    data: {
-      records: users,
-      total: count
-    }
-  })
+  const response = await getList({
+		page,
+    pageSize,
+    condition,
+    sortCondition,
+    Model: User,
+	})
+	res.json(response)
 }

@@ -1,7 +1,5 @@
 //导入用户集合构造函数
-import {
-  User
-} from '../../../model/user'
+import { User } from '../../../model/user'
 const bcrypt = require('bcrypt')
 
 export default async (req, res) => {
@@ -17,7 +15,7 @@ export default async (req, res) => {
   }
   //如果查询到了用户，user变量的值是对象类型，其中存储的是用户信息
   //如果没有查询到用户，user变量为空
-  let user = await User.findOne({
+  const user = await User.findOne({
     username: username,
   })
   if (user) {
@@ -29,7 +27,7 @@ export default async (req, res) => {
       //登录成功
       //将用户及用户角色名存储在请求对象中
       req.session.username = user.username
-      req.session.role = user.role
+      req.session.roles = user.roles
       //res.send('登录成功')
       //req.app就是app.js里的app对象,app.locals的内容所有模版都能取到
       req.app.locals.userInfo = user

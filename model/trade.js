@@ -6,7 +6,7 @@ const tradeSchema = new mongoose.Schema({
     ref: 'User',
     required: [true, '发布者不可为空']
   },
-  exchangeType: String, // 交易类型，我有菜/我有价
+  exchangeType: { type: String, required: true }, // 交易类型
   validTime: Number, // 有效时间
   isLineup: Boolean, // 是否排队模式
   isPublic: Boolean, // 是否公开
@@ -20,7 +20,7 @@ const tradeSchema = new mongoose.Schema({
   comments: Number, // 评论数量
   created_time: { // 新增时间
     type: Number,
-    default: Date.now,
+    maxlength: 10
   },
 })
 

@@ -6,7 +6,7 @@ export default async (req, res) => {
         sort
     } = req.query
 
-    let sortCondition = { //默认筛选条件为名字
+    let sortCondition = {
         //name: 1
         orderNum: 1
     }
@@ -15,9 +15,7 @@ export default async (req, res) => {
         "type": type
     }
 
-    if (sort) {
-        sortCondition = JSON.parse(sort)
-    }
+    if (sort) sortCondition = JSON.parse(sort)
 
     await Option.find(condition).sort(sortCondition).collation({
         locale: 'zh'

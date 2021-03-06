@@ -1,4 +1,3 @@
-// 引进mongoose第三方模块
 const mongoose = require('mongoose')
 
 // 创建鱼类集合规则
@@ -9,15 +8,9 @@ const fishSchema = new mongoose.Schema({
     minlength: 1,
     required: [true, '请填写名称'],
   },
-  engName: {
-    type: String,
-  },
-  jpnName: {
-    type: String,
-  },
-  price: {
-    type: Number,
-  },
+  engName: String,
+  jpnName: String,
+  price: Number,
   activeTime: {
     north: Array,
     south: Array
@@ -25,29 +18,12 @@ const fishSchema = new mongoose.Schema({
   locale: Array, // 出现地点
   periodStart: String,
   periodEnd: String,
-  period: { // 时间段
-    type: String,
-  },
-  shadow: { // 鱼影
-    type: String
-  },
-  unlockCondition: { // 解锁要求
-    type: String,
-  },
-  rarity: { // 稀有度
-    type: String,
-  },
-  introduction: {
-    type: String,
-  },
-  photoSrc: {
-    type: String,
-    default: null,
-  },
-  updated_time: { // 更新时间
-    type: Number,
-    default: Date.now,
-  },
+  period: String, // 时间段
+  shadow: String, // 鱼影
+  unlockCondition: String, // 解锁要求
+  rarity: String,// 稀有度
+  introduction: String,
+  photoSrc: String,
 })
 
 const Fish = mongoose.model('Fish', fishSchema)

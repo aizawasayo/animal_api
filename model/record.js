@@ -1,4 +1,3 @@
-// 引进mongoose第三方模块
 const mongoose = require('mongoose')
 
 const recordSchema = new mongoose.Schema({
@@ -14,10 +13,6 @@ const recordSchema = new mongoose.Schema({
   salePrice: Number, // 售出价格
   channel: Array,
   photoSrc: Array,
-  updated_time: { // 更新时间
-    type: Number,
-    default: Date.now,
-  },
 })
 
 const Record = mongoose.model('Record', recordSchema)

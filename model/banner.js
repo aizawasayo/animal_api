@@ -7,10 +7,10 @@ const bannerSchema = new mongoose.Schema({
     minlength: 6,
     maxlength: 30,
   },
-  link: {
-    // 链接
-    type: String,
-    // required: true
+  link: String, // 链接
+  state: { // 启用状态: / 0:启用；1:禁用
+    type: Number,
+    default: 0,
   },
   avatar: {
     type: String,
@@ -18,13 +18,8 @@ const bannerSchema = new mongoose.Schema({
   },
   created_time: { // 新增时间
     type: Number,
-    default: Date.now,
-  },
-  state: {
-    // 启用状态: / 0:启用；1:禁用
-    type: Number,
-    default: 0,
-  },
+    maxlength: 10
+  }
 })
 
 const Banner = mongoose.model('Banner', bannerSchema)

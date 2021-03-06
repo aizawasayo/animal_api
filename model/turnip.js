@@ -10,10 +10,11 @@ const turnipSchema = new mongoose.Schema({
     ref: 'User',
     required: [true, '发布者不可为空']
   },
-  exchangeType: String, // 交易类型，我有菜/我有价
-  validTime: {
+  exchangeType: { type: String, required: true }, // 交易类型，我有菜/我有价
+  validTime: { // 有效时间
     type: Number,
-  }, // 有效时间
+    maxlength: 10
+  }, 
   isLineup: Boolean, // 是否排队模式
   isPublic: Boolean, // 是否公开
   isAuto: Boolean, // 自动叫号
@@ -26,7 +27,7 @@ const turnipSchema = new mongoose.Schema({
   comments: Number, // 评论数量
   created_time: { // 新增时间
     type: Number,
-    default: Date.now,
+    maxlength: 10
   },
 })
 

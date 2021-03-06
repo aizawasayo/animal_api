@@ -1,4 +1,3 @@
-// 引进mongoose第三方模块
 const mongoose = require('mongoose')
 
 const optionSchema = new mongoose.Schema({
@@ -17,10 +16,6 @@ const optionSchema = new mongoose.Schema({
   duration: String, // 存在时期 部分配置项(如活动)专用
   icon: String, // 专属图标 部分配置项(如话题)专用
   color: String, // 专属颜色 部分配置项(如话题)专用
-  updated_time: { // 更新时间
-    type: Number,
-    default: Date.now,
-  },
 })
 
 const Option = mongoose.model('Option', optionSchema)

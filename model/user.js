@@ -16,38 +16,30 @@ const userSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        unique: true, // 保证邮箱地址不重复
-        required: true
+        // unique: true, // 保证邮箱地址不重复 还是靠api处理吧。。
+        // required: true
     },
     nickname: {
         // 游戏中的昵称
         type: String,
         // required: true
     },
-    gameId: {
-        type: String,
-    },
+    gameId: String,
     islandName: String,
-    position: {
-        // 岛屿位置：North 北半球 / South 南半球
-        type: String,
-    },
+    position: String, // 岛屿位置：North 北半球 / South 南半球
     startDate: {
         // 登岛日期
         type: Number,
-        // default: Date.now,
+        maxlength: 10
     },
     password: {
         type: String,
         required: true,
-    },
-    avatar: {
-        type: String,
-    },
+    }, 
     roles: {
         // admin : 超级管理员 / mormal : 普通用户
         type: Array,
-        default: 'normal',
+        default: ['normal'],
         required: true,
     },
     state: {
@@ -59,9 +51,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         maxlength: 60
     },
+    avatar: String,
     created_time: { // 新增时间
         type: Number,
-        default: Date.now,
+        maxlength: 10
     },
 })
 
@@ -94,16 +87,16 @@ const validateUser = (user) => {
             .max(12)
             .required()
             .error(new Error('用户名不符合验证规则')),
-        email: Joi.string().email().error(new Error('邮箱格式不符合要求')),
+        email: Joi.string().email().error(new Error('邮箱格式不符合要求')).allow(''),
         password: user._id ? Joi.string() : Joi.string()
             .regex(/^[a-zA-Z0-9]{3,30}$/)
             .required()
             .error(new Error('密码格式不符合要求')),
-        nickname: Joi.string(),
-        islandName: Joi.string(),
-        gameId: Joi.string(),
-        position: Joi.string(),
-        startDate: Joi.date(),
+        nickname: Joi.string().allow(''),
+        islandName: Joi.string().allow(''),
+        gameId: Joi.string().allow('').max(17).error(new Error('动森ID长度不符合要求')),
+        position: Joi.string().allow(''),
+        startDate: Joi.number().allow(null),
         avatar: Joi.string().allow(''),
         signature: Joi.string().allow(''),
         roles: Joi.array().items(Joi.string().valid('admin', 'normal')).error(new Error('角色值非法')),
@@ -114,6 +107,6 @@ const validateUser = (user) => {
 
 // 将用户集合作为模块成员进行导出
 module.exports = {
-    User, // 相当于 User: User，键值相等的情况
+    User, 
     validateUser,
 }
