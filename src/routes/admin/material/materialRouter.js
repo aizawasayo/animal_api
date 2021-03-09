@@ -1,29 +1,40 @@
-import express from 'express';
-const router = express.Router();
+import express from 'express'
+const router = express.Router()
 
-import material from './material'
-import materialAdd from './material-add'
-import materialOne from './material-info'
-import materialDelete from './material-delete'
-import materialSearch from './material-search'
+import Material from '../../../../model/material'
 
-//鱼类列表路由
-router.get('/', material)
+import AddData from '../../common/add'
+import getById from '../../common/getOne'
+import deleteById from '../../common/delete'
+import searchAll from '../../common/search'
+import materialList from './materialList'
+
+// 素材列表路由
+router.get('/', materialList)
 
 //实时搜索材料名
-router.get('/search', materialSearch)
+router.get('/search', async (req, res) => {
+  const response = await searchAll(req.query.name, Material)
+  res.json(response) 
+})
 
-//鱼类添加功能路由
-router.post('/', materialAdd)
+// 素材添加功能路由
+router.post('/', async (req, res) => {
+	const response = await AddData(req.body, Material)
+  res.json(response) 
+})
 
-//鱼类查询功能路由
-router.get('/:id', materialOne)
+// 素材查询功能路由
+router.get('/:id', async (req, res) => {
+  const response = await getById(req.params.id, Material)
+  res.json(response) 
+})
 
-//鱼类编辑功能路由
-router.put('/:id', materialAdd)
-
-//鱼类删除功能路由
-router.delete('/:id', materialDelete)
+// 素材删除功能路由
+router.delete('/:id', async (req, res) => {
+	const response = await deleteById(req.params.id, Material)
+  res.json(response) 
+})
 
 
 

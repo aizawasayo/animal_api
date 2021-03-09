@@ -33,7 +33,6 @@ export default (req, res, next) => {
 		message: '上传成功'
 	});
 
-
 	// fs.rename(path.join(process.cwd(), "/" + req.file.path), path.join(process.cwd(), targetPath), function (err) {
 	// 	if (err) {
 	// 		return res.json({

@@ -1,18 +1,33 @@
-import express from 'express';
-const router = express.Router();
+import express from 'express'
+const router = express.Router()
 
-import comment from './turnip'
-import commentAdd from './turnip-add'
-import commentDelete from './turnip-delete'
+import TurnipComment from '../../../model/turnip_comment'
 
-//焦点图列表路由
-router.get('/', comment)
+import AddData from '../common/add'
+import getById from '../common/getOne'
+import deleteById from '../common/delete'
+import commentList from './turnipList'
 
-//焦点图添加功能路由
-router.post('/', commentAdd)
+// 分页查询菜市场评论列表
+router.get('/', commentList)
 
-//删除焦点图信息
-router.delete('/:id', commentDelete)
+// 菜市场评论添加路由
+router.post('/', async (req, res) => {
+	const response = await AddData(req.body, TurnipComment, { key: false, addTime: true })
+  res.json(response) 
+})
+
+// 菜市场评论查询路由
+router.get('/:id', async (req, res) => {
+  const response = await getById(req.params.id, TurnipComment)
+  res.json(response) 
+})
+
+// 删除菜市场评论
+router.delete('/:id', async (req, res) => {
+  const response = await deleteById(req.params.id, TurnipComment)
+  res.json(response) 
+})
 
 
 export default router

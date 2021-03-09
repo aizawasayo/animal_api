@@ -5,7 +5,7 @@ const artworkSchema = new mongoose.Schema({
     type: String,
     maxlength: 16,
     minlength: 2,
-    required: [true, '请填写艺术品名字'],
+    required: [true, '艺术品名称不能为空'],
   },
   engName: String,
   jpnName: String,

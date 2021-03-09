@@ -5,7 +5,7 @@ const fossilSchema = new mongoose.Schema({
     type: String,
     maxlength: 16,
     minlength: 2,
-    required: [true, '请填写化石名字'],
+    required: [true, '化石名称不能为空'],
   },
   engName: String,
   jpnName: String,

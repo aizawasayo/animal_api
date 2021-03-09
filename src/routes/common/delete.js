@@ -12,7 +12,10 @@ export default (pid, Model) => {
         message: '批量删除成功'
       }
     }).catch(err => {
-      throw new Error(err)
+      return {
+        code: 400,
+        message: '删除失败' + err.message
+      }
     })
   } else {
     return Model.deleteOne({
@@ -23,7 +26,10 @@ export default (pid, Model) => {
         message: '删除成功'
       }
     }).catch(err => {
-      throw new Error(err)
+      return {
+        code: 400,
+        message: '删除失败' + err.message
+      }
     })
   }
 }

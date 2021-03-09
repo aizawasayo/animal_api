@@ -5,7 +5,7 @@ const halobiosSchema = new mongoose.Schema({
     type: String,
     maxlength: 16,
     minlength: 1,
-    required: [true, '请填写名称'],
+    required: [true, '海洋生物名称不能为空'],
   },
   engName: String,
   jpnName: String,

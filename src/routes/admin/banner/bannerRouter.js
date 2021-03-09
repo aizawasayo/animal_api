@@ -1,28 +1,37 @@
-import express from 'express';
+import express from 'express'
 const router = express.Router();
 
-import banner from './banner'
-import bannerList from './banner-list'
-import bannerAdd from './banner-add'
-import bannerOne from './banner-info'
-import bannerDelete from './banner-delete'
+import Banner from '../../../../model/banner'
 
-//焦点图列表路由
-router.get('/', banner)
+import AddData from '../../common/add'
+import getById from '../../common/getOne'
+import deleteById from '../../common/delete'
+import bannersByPage from './bannerList'
+import bannerAll from './bannerAll'
 
-router.get('/list', bannerList)
 
-//焦点图添加功能路由
-router.post('/', bannerAdd)
+// 焦点图分页查询列表路由
+router.get('/', bannersByPage)
 
-//焦点图修改功能路由
-router.put('/:id', bannerAdd)
+// 获取全部焦点图路由
+router.get('/list', bannerAll)
 
-//焦点图查询功能路由
-router.get('/:id', bannerOne)
+// 焦点图添加功能路由
+router.post('/', async (req, res) => {
+	const response = await AddData(req.body, Banner, { key: ['title'], addTime: true, uniqueName: '标题' })
+  res.json(response) 
+})
 
-//删除焦点图信息
-router.delete('/:id', bannerDelete)
+// 焦点图查询功能路由
+router.get('/:id', async (req, res) => {
+  const response = await getById(req.params.id, Banner)
+  res.json(response) 
+})
 
+// 删除焦点图
+router.delete('/:id', async (req, res) => {
+	const response = await deleteById(req.params.id, Banner)
+  res.json(response) 
+})
 
 export default router

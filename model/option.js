@@ -5,11 +5,11 @@ const optionSchema = new mongoose.Schema({
     type: String,
     maxlength: 16,
     minlength: 1,
-    required: [true, '请填写名称'],
+    required: [true, '配置选项名称不能为空'],
   },
   type: {
     type: String,
-    required: [true, '请选择类型'],
+    required: [true, '配置类型不能为空'],
   },
   orderNum: Number,
   position: Array, // 地理位置，部分配置项(如活动)专用

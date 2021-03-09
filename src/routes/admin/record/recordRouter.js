@@ -1,28 +1,32 @@
-import express from 'express';
-const router = express.Router();
+import express from 'express'
+const router = express.Router()
 
-import record from './record'
-import recordAdd from './record-add'
-import recordOne from './record-info'
-import recordDelete from './record-delete'
-import recordSearch from './record-search'
+import Record from '../../../../model/record'
 
-//服饰列表路由
-router.get('/', record)
+import AddData from '../../common/add'
+import getById from '../../common/getOne'
+import deleteById from '../../common/delete'
+import recordList from './recordList'
 
-//实时搜索配方名
-router.get('/search', recordSearch)
+// 唱片列表路由
+router.get('/', recordList)
 
-//鱼类添加功能路由
-router.post('/', recordAdd)
+// 唱片添加功能路由
+router.post('/', async (req, res) => {
+	const response = await AddData(req.body, Record)
+  res.json(response) 
+})
 
-//鱼类查询功能路由
-router.get('/:id', recordOne)
+// 唱片查询功能路由
+router.get('/:id', async (req, res) => {
+  const response = await getById(req.params.id, Record)
+  res.json(response) 
+})
 
-//鱼类编辑功能路由
-router.put('/:id', recordAdd)
-
-//鱼类删除功能路由
-router.delete('/:id', recordDelete)
+// 唱片删除功能路由
+router.delete('/:id', async (req, res) => {
+  const response = await deleteById(req.params.id, Record)
+  res.json(response) 
+})
 
 export default router

@@ -5,7 +5,7 @@ const recordSchema = new mongoose.Schema({
     type: String,
     maxlength: 16,
     minlength: 2,
-    required: [true, '请填写唱片名'],
+    required: [true, '唱片名称不能为空'],
   },
   engName: String,
   jpnName: String,

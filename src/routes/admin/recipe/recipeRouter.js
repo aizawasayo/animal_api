@@ -1,28 +1,39 @@
-import express from 'express';
-const router = express.Router();
+import express from 'express'
+const router = express.Router()
 
-import recipe from './recipe'
-import recipeAdd from './recipe-add'
-import recipeOne from './recipe-info'
-import recipeDelete from './recipe-delete'
-import recipeSearch from './recipe-search'
+import Recipe from '../../../../model/recipe'
+
+import AddData from '../../common/add'
+import getById from '../../common/getOne'
+import deleteById from '../../common/delete'
+import searchAll from '../../common/search'
+import recipeList from './recipeList'
 
 //配方列表路由
-router.get('/', recipe)
+router.get('/', recipeList)
 
-//实时搜索配方名
-router.get('/search', recipeSearch)
+// 实时搜索配方名
+router.get('/search', async (req, res) => {
+  const response = await searchAll(req.query.name, Recipe)
+  res.json(response) 
+})
 
-//鱼类添加功能路由
-router.post('/', recipeAdd)
+// 配方添加功能路由
+router.post('/', async (req, res) => {
+	const response = await AddData(req.body, Recipe)
+  res.json(response) 
+})
 
-//鱼类查询功能路由
-router.get('/:id', recipeOne)
+// 配方查询功能路由
+router.get('/:id', async (req, res) => {
+  const response = await getById(req.params.id, Recipe)
+  res.json(response) 
+})
 
-//鱼类编辑功能路由
-router.put('/:id', recipeAdd)
-
-//鱼类删除功能路由
-router.delete('/:id', recipeDelete)
+// 配方删除功能路由
+router.delete('/:id', async (req, res) => {
+  const response = await deleteById(req.params.id, Recipe)
+  res.json(response) 
+})
 
 export default router

@@ -1,24 +1,32 @@
-import express from 'express';
-const router = express.Router();
+import express from 'express'
+const router = express.Router()
 
-import insect from './insect'
-import insectAdd from './insect-add'
-import insectOne from './insect-info'
-import insectDelete from './insect-delete'
+import Insect from '../../../../model/insect' 
 
-//鱼类列表路由
-router.get('/', insect)
+import AddData from '../../common/add'
+import getById from '../../common/getOne'
+import deleteById from '../../common/delete'
+import insectList from './insectList'
 
-//鱼类添加功能路由
-router.post('/', insectAdd)
+// 昆虫列表路由
+router.get('/', insectList)
 
-//鱼类查询功能路由
-router.get('/:id', insectOne)
+// 昆虫添加功能路由
+router.post('/', async (req, res) => {
+	const response = await AddData(req.body, Insect)
+  res.json(response) 
+})
 
-//鱼类编辑功能路由
-router.put('/:id', insectAdd)
+// 昆虫查询功能路由
+router.get('/:id', async (req, res) => {
+  const response = await getById(req.params.id, Insect)
+  res.json(response) 
+})
 
-//鱼类删除功能路由
-router.delete('/:id', insectDelete)
+// 昆虫删除功能路由
+router.delete('/:id', async (req, res) => {
+	const response = await deleteById(req.params.id, Insect)
+  res.json(response) 
+})
 
 export default router

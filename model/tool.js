@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const toolSchema = new mongoose.Schema({
 	name: {
 		type: String,
-		required: true
+		required: [true, '工具名称不能为空']
 	},
 	engName: String,
 	jpnName: String,

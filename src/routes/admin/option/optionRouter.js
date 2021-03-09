@@ -1,32 +1,44 @@
-import express from 'express';
-const router = express.Router();
+import express from 'express'
+const router = express.Router()
 
-import option from './option'
-import optionAdd from './option-add'
-import optionOne from './option-info'
-import optionDelete from './option-delete'
-import optionSearch from './option-search'
-import optionList from './option-list'
+import Option from '../../../../model/option'
 
-//配方列表路由
-router.get('/', option)
+import AddData from '../../common/add'
+import getById from '../../common/getOne'
+import deleteById from '../../common/delete'
+import searchAll from '../../common/search'
+import optionList from './optionList'
 
-//获取所有选项
-router.get('/list', optionList)
+import optionAll from './optionAll'
 
-//实时搜索配方名
-router.get('/search', optionSearch)
+// 分页查询选项列表
+router.get('/', optionList)
 
-//鱼类添加功能路由
-router.post('/', optionAdd)
+// 获取所有选项
+router.get('/list', optionAll)
 
-//鱼类查询功能路由
-router.get('/:id', optionOne)
+// 实时搜索选项名
+router.get('/search', async (req, res) => {
+  const response = await searchAll(req.query.name, Option)
+  res.json(response) 
+})
 
-//鱼类编辑功能路由
-router.put('/:id', optionAdd)
+// 选项添加功能路由
+router.post('/', async (req, res) => {
+	const response = await AddData(req.body, Option, { key: ['name','type'], addTime: true, uniqueName: '选项' })
+  res.json(response) 
+})
 
-//鱼类删除功能路由
-router.delete('/:id', optionDelete)
+// 选项查询功能路由
+router.get('/:id', async (req, res) => {
+  const response = await getById(req.params.id, Option)
+  res.json(response) 
+})
+
+// 选项删除功能路由
+router.delete('/:id', async (req, res) => {
+	const response = await deleteById(req.params.id, Option)
+  res.json(response) 
+})
 
 export default router

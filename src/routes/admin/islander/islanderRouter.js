@@ -1,24 +1,32 @@
-import express from 'express';
-const router = express.Router();
+import express from 'express'
+const router = express.Router()
 
-import islander from './islander'
-import islanderAdd from './islander-add'
-import islanderOne from './islander-info'
-import islanderDelete from './islander-delete'
+import Islander from '../../../../model/islander'
 
-//岛民列表路由
-router.get('/', islander)
+import AddData from '../../common/add'
+import getById from '../../common/getOne'
+import deleteById from '../../common/delete'
+import islanderList from './islanderList'
 
-//岛民添加功能路由
-router.post('/', islanderAdd)
+// 岛民列表路由
+router.get('/', islanderList)
 
-//岛民查询功能路由
-router.get('/:id', islanderOne)
+// 岛民添加功能路由
+router.post('/', async (req, res) => {
+	const response = await AddData(req.body, Islander )
+  res.json(response) 
+})
 
-//岛民编辑功能路由
-router.put('/:id', islanderAdd)
+// 岛民查询功能路由
+router.get('/:id', async (req, res) => {
+  const response = await getById(req.params.id, Islander)
+  res.json(response) 
+})
 
-//岛民删除功能路由
-router.delete('/:id', islanderDelete)
+// 岛民删除功能路由
+router.delete('/:id', async (req, res) => {
+	const response = await deleteById(req.params.id, Islander)
+  res.json(response) 
+})
 
 export default router

@@ -1,28 +1,38 @@
-import express from 'express';
-const router = express.Router();
+import express from 'express'
+const router = express.Router()
 
-import artwork from './artwork'
-import artworkAdd from './artwork-add'
-import artworkOne from './artwork-info'
-import artworkDelete from './artwork-delete'
-import artworkSearch from './artwork-search'
+import Artwork from '../../../../model/artwork'
 
-//服饰列表路由
-router.get('/', artwork)
+import AddData from '../../common/add'
+import getById from '../../common/getOne'
+import deleteById from '../../common/delete'
+import artworkList from './artworkList'
 
-//实时搜索配方名
-router.get('/search', artworkSearch)
+// 分页列表路由
+router.get('/', artworkList)
 
-//鱼类添加功能路由
-router.post('/', artworkAdd)
+// 添加功能路由
+router.post('/', async (req, res) => {
+	const response = await AddData(req.body, Artwork)
+  res.json(response) 
+})
 
-//鱼类查询功能路由
-router.get('/:id', artworkOne)
+// 查询功能路由
+router.get('/:id', async (req, res) => {
+  const response = await getById(req.params.id, Artwork)
+  res.json(response) 
+})
 
-//鱼类编辑功能路由
-router.put('/:id', artworkAdd)
+// 编辑功能路由
+// router.put('/:id', async (req, res) => {
+// 	const response = await AddData(req.body, Artwork)
+//   res.json(response) 
+// })
 
-//鱼类删除功能路由
-router.delete('/:id', artworkDelete)
+// 删除功能路由
+router.delete('/:id', async (req, res) => {
+	const response = await deleteById(req.params.id, Artwork)
+  res.json(response) 
+})
 
 export default router

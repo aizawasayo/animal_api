@@ -7,6 +7,9 @@ export default (id, Model, ref) => {
       data: res
     }
   }).catch(err => {
-    throw new Error(err)
+    return {
+      code: 400,
+      message: '查询失败' + err.message
+    }
   })
 }

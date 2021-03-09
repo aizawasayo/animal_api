@@ -1,28 +1,39 @@
-import express from 'express';
-const router = express.Router();
+import express from 'express'
+const router = express.Router()
 
-import plant from './plant'
-import plantAdd from './plant-add'
-import plantOne from './plant-info'
-import plantDelete from './plant-delete'
-import plantSearch from './plant-search'
+import Plant from '../../../../model/plant'
 
-//鱼类列表路由
-router.get('/', plant)
+import AddData from '../../common/add'
+import getById from '../../common/getOne'
+import deleteById from '../../common/delete'
+import searchAll from '../../common/search'
+import plantList from './plantList'
 
-//实时搜索植物名
-router.get('/search', plantSearch)
+// 植物列表路由
+router.get('/', plantList)
 
-//鱼类添加功能路由
-router.post('/', plantAdd)
+// 实时搜索植物名
+router.get('/search', async (req, res) => {
+  const response = await searchAll(req.query.name, Plant)
+  res.json(response) 
+})
 
-//鱼类查询功能路由
-router.get('/:id', plantOne)
+// 植物添加功能路由
+router.post('/', async (req, res) => {
+	const response = await AddData(req.body, Plant)
+  res.json(response) 
+})
 
-//鱼类编辑功能路由
-router.put('/:id', plantAdd)
+// 植物查询功能路由
+router.get('/:id', async (req, res) => {
+  const response = await getById(req.params.id, Plant)
+  res.json(response) 
+})
 
-//鱼类删除功能路由
-router.delete('/:id', plantDelete)
+// 植物删除功能路由
+router.delete('/:id', async (req, res) => {
+  const response = await deleteById(req.params.id, Plant)
+  res.json(response) 
+})
 
 export default router

@@ -1,12 +1,11 @@
 const mongoose = require('mongoose')
 
-// 创建素材集合规则
 const materialSchema = new mongoose.Schema({
   name: {
     type: String,
     maxlength: 16,
     minlength: 1,
-    required: [true, '请填写名称'],
+    required: [true, '素材名称不能为空'],
   },
   engName: String,
   jpnName: String,

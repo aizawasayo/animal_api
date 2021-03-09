@@ -5,12 +5,12 @@ const guideSchema = new mongoose.Schema({
     type: String,
     maxlength: 30,
     minlength: 8,
-    required: [true, '请填写文章标题'],
+    required: [true, '文章标题不能为空'],
   },
   author: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    required: [true, '请传递作者']
+    required: [true, '作者id不能为空']
   },
   type: String, // 分类
   content_short: String,

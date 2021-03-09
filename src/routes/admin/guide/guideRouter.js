@@ -1,25 +1,33 @@
-import express from 'express';
-const router = express.Router();
+import express from 'express'
+const router = express.Router()
 
-import guide from './guide'
-import guideAdd from './guide-add'
-import guideEdit from './guide-edit'
-import guideOne from './guide-info'
-import guideDelete from './guide-delete'
+import Guide from '../../../../model/guide' 
 
-//用户列表路由
-router.get('/', guide)
+import AddData from '../../common/add'
+import getById from '../../common/getOne'
+import deleteById from '../../common/delete'
+import guideList from './guideList'
 
-//用户添加功能路由
-router.post('/', guideAdd)
+// 攻略列表路由
+router.get('/', guideList)
 
-//用户修改功能路由
-router.put('/:id', guideEdit)
+// 攻略添加功能路由
+router.post('/', async (req, res) => {
+  if (req.body.author) req.body.author = req.body.author._id
+	const response = await AddData(req.body, Guide, { key: ['title'], addTime: true, uniqueName: '标题' })
+  res.json(response) 
+})
 
-//用户查询功能路由
-router.get('/:id', guideOne)
+// 攻略查询功能路由
+router.get('/:id', async (req, res) => {
+  const response = await getById(req.params.id, Guide, 'author')
+  res.json(response) 
+})
 
-//删除用户信息
-router.delete('/:id', guideDelete)
+// 删除攻略
+router.delete('/:id', async (req, res) => {
+	const response = await deleteById(req.params.id, Guide)
+  res.json(response) 
+})
 
 export default router

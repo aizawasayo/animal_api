@@ -1,12 +1,11 @@
 const mongoose = require('mongoose')
 
-// 创建昆虫集合规则
 const insectSchema = new mongoose.Schema({
   name: {
     type: String,
     maxlength: 16,
     minlength: 2,
-    required: [true, '请填写名称'],
+    required: [true, '昆虫名称不能为空'],
   },
   engName: String,
   jpnName: String,

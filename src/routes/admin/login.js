@@ -21,7 +21,6 @@ export default async (req, res) => {
   if (user) {
     //将客户端输入的密码和用户信息中的密码进行比对
     let isValid = await bcrypt.compare(password, user.password)
-    console.log(isValid)
     if (isValid) {
       //如果密码比对成功
       //登录成功

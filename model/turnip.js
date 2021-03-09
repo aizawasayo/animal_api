@@ -8,7 +8,7 @@ const turnipSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    required: [true, '发布者不可为空']
+    required: [true, '发布者不能为空']
   },
   exchangeType: { type: String, required: true }, // 交易类型，我有菜/我有价
   validTime: { // 有效时间

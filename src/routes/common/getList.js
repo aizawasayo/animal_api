@@ -1,3 +1,4 @@
+// 分页查询
 export default (props) => {
   const {
     page,
@@ -13,25 +14,28 @@ export default (props) => {
   
   return Model.countDocuments(condition).exec()
   .then(res => {
-    if (res) return res
+    return res
   })
-  .then(count => {
-    if (count) {
-      return Model.find(condition).skip(skip).limit(limit).populate(refKey).sort(sortCondition).collation({
-        locale: 'zh'
-      }).exec().then(res => {
-        if(res) return {
-          code: 200,
-          message: '列表获取成功',
-          data: {
-            list: res,
-            total: count
-          }
+  .then(total => {
+    const message = total ? '列表查询成功' : '未查询到符合条件的数据'
+    return Model.find(condition).skip(skip).limit(limit).populate(refKey).sort(sortCondition).collation({
+      locale: 'zh'
+    }).exec().then(res => {
+      if(res) return {
+        code: 200,
+        message,
+        data: {
+          list: res,
+          total
         }
-      })
-    }
+      }
+    })
   })
   .catch (err => {
-    throw new Error(err)
+    //throw new Error(err)
+    return {
+      code: 400,
+      message: '列表查询失败' + err.message
+    }
   }) 
 }

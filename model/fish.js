@@ -1,12 +1,11 @@
 const mongoose = require('mongoose')
 
-// 创建鱼类集合规则
 const fishSchema = new mongoose.Schema({
   name: {
     type: String,
     maxlength: 16,
     minlength: 1,
-    required: [true, '请填写名称'],
+    required: [true, '鱼类名称不能为空'],
   },
   engName: String,
   jpnName: String,

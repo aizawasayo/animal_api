@@ -1,12 +1,11 @@
 const mongoose = require('mongoose')
 
-// 创建岛民集合规则
 const islanderSchema = new mongoose.Schema({
   name: {
     type: String,
     maxlength: 8,
     minlength: 2,
-    required: [true, '请填写岛民名字'],
+    required: [true, '岛民名字不能为空'],
   },
   engName: String,
   jpnName: String,

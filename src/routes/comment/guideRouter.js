@@ -1,18 +1,33 @@
-import express from 'express';
-const router = express.Router();
+import express from 'express'
+const router = express.Router()
 
-import comment from './guide'
-import commentAdd from './guide-add'
-import commentDelete from './guide-delete'
+import GuideComment from '../../../model/guide_comment'
 
-//焦点图列表路由
-router.get('/', comment)
+import AddData from '../common/add'
+import getById from '../common/getOne'
+import deleteById from '../common/delete'
+import commentList from './guideList'
 
-//焦点图添加功能路由
-router.post('/', commentAdd)
 
-//删除焦点图信息
-router.delete('/:id', commentDelete)
+// 分页查询攻略评论列表路由
+router.get('/', commentList)
 
+// 攻略评论添加路由
+router.post('/', async (req, res) => {
+	const response = await AddData(req.body, GuideComment, { key: false, addTime: true })
+  res.json(response) 
+})
+
+// 攻略评论查询路由
+router.get('/:id', async (req, res) => {
+  const response = await getById(req.params.id, GuideComment)
+  res.json(response) 
+})
+
+// 删除攻略评论
+router.delete('/:id', async (req, res) => {
+	const response = await deleteById(req.params.id, GuideComment)
+  res.json(response) 
+})
 
 export default router

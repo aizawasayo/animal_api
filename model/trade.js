@@ -4,7 +4,7 @@ const tradeSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    required: [true, '发布者不可为空']
+    required: [true, '发布者不能为空']
   },
   exchangeType: { type: String, required: true }, // 交易类型
   validTime: Number, // 有效时间

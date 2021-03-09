@@ -1,28 +1,39 @@
-import express from 'express';
-const router = express.Router();
+import express from 'express'
+const router = express.Router()
 
-import clothing from './clothing'
-import clothingAdd from './clothing-add'
-import clothingOne from './clothing-info'
-import clothingDelete from './clothing-delete'
-import clothingSearch from './clothing-search'
+import Clothing from '../../../../model/clothing'
 
-//服饰列表路由
-router.get('/', clothing)
+import AddData from '../../common/add'
+import getById from '../../common/getOne'
+import deleteById from '../../common/delete'
+import searchAll from '../../common/search'
+import clothingList from './clothingList'
 
-//实时搜索配方名
-router.get('/search', clothingSearch)
+// 服饰列表路由
+router.get('/', clothingList)
 
-//鱼类添加功能路由
-router.post('/', clothingAdd)
+// 实时搜索全部符合条件的服饰
+router.get('/search', async (req, res) => {
+  const response = await searchAll(req.query.name, Clothing)
+  res.json(response) 
+})
 
-//鱼类查询功能路由
-router.get('/:id', clothingOne)
+// 添加功能路由
+router.post('/', async (req, res) => {
+	const response = await AddData(req.body, Clothing)
+  res.json(response) 
+})
 
-//鱼类编辑功能路由
-router.put('/:id', clothingAdd)
+// 查询功能路由
+router.get('/:id', async (req, res) => {
+  const response = await getById(req.params.id, Clothing)
+  res.json(response) 
+})
 
-//鱼类删除功能路由
-router.delete('/:id', clothingDelete)
+// 删除功能路由
+router.delete('/:id', async (req, res) => {
+	const response = await deleteById(req.params.id, Clothing)
+  res.json(response) 
+})
 
 export default router

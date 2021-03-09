@@ -1,24 +1,32 @@
-import express from 'express';
-const router = express.Router();
+import express from 'express'
+const router = express.Router()
 
-import design from './design'
-import designAdd from './design-add'
-import designOne from './design-info'
-import designDelete from './design-delete'
+import Design from '../../../../model/design'
 
-//大头菜列表路由
-router.get('/', design)
+import AddData from '../../common/add'
+import getById from '../../common/getOne'
+import deleteById from '../../common/delete'
+import designList from './designList'
 
-//大头菜添加功能路由
-router.post('/', designAdd)
+// 分页查询列表路由
+router.get('/', designList)
 
-//大头菜查询功能路由
-router.get('/:id', designOne)
+// 添加功能路由
+router.post('/', async (req, res) => {
+	const response = await AddData(req.body, Design, { addTime: true })
+  res.json(response) 
+})
 
-//大头菜编辑功能路由
-router.put('/:id', designAdd)
+// 查询功能路由
+router.get('/:id', async (req, res) => {
+  const response = await getById(req.params.id, Design, 'user')
+  res.json(response) 
+})
 
-//大头菜删除功能路由
-router.delete('/:id', designDelete)
+// 删除功能路由
+router.delete('/:id', async (req, res) => {
+	const response = await deleteById(req.params.id, Design)
+  res.json(response) 
+})
 
 export default router

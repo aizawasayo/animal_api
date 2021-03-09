@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const bannerSchema = new mongoose.Schema({
   title: { // 标题
     type: String,
-    required: true,
+    required: [true, '标题不能为空'],
     minlength: 6,
     maxlength: 30,
   },
@@ -14,7 +14,7 @@ const bannerSchema = new mongoose.Schema({
   },
   avatar: {
     type: String,
-    required: true
+    required: [true, '焦点图图片不能为空']
   },
   created_time: { // 新增时间
     type: Number,
