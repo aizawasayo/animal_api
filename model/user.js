@@ -25,8 +25,7 @@ const userSchema = new mongoose.Schema({
 	gameId: String,
 	islandName: String,
 	position: String, // 岛屿位置：North 北半球 / South 南半球
-	startDate: {
-			// 登岛日期
+	startDate: { // 登岛日期
 		type: Number,
 		maxlength: 10
 	},
@@ -61,14 +60,14 @@ async function createUser() {
 	const salt = await bcrypt.genSalt(10)
 	const pass = await bcrypt.hash('123456', salt)
 	const user = await User.create({
-			username: 'BlackFire',
-			nickname: '啵啵弟',
-			islandName: '囡囡大王岛',
-			password: pass,
-			gameId: 'SW-3286-3822-7865',
-			position: 'North',
-			roles: ['admin'],
-			state: 0,
+		username: 'BlackFire',
+		nickname: '啵啵弟',
+		islandName: '囡囡大王岛',
+		password: pass,
+		gameId: 'SW-3286-3822-7865',
+		position: 'North',
+		roles: ['admin'],
+		state: 0,
 	})
 }
 // createUser();
@@ -77,26 +76,27 @@ async function createUser() {
 const validateUser = (user) => {
 	// 定义对象的验证规则
 	const schema = {
-			_id: Joi.string().allow(''),
-			username: Joi.string()
-					.min(2)
-					.max(12)
-					.required()
-					.error(new Error('用户名不符合验证规则')),
-			email: Joi.string().email().error(new Error('邮箱格式不符合要求')).allow(''),
-			password: user._id ? Joi.string() : Joi.string()
-					.regex(/^[a-zA-Z0-9]{3,30}$/)
-					.required()
-					.error(new Error('密码格式不符合要求')),
-			nickname: Joi.string().allow(''),
-			islandName: Joi.string().allow(''),
-			gameId: Joi.string().allow('').max(17).error(new Error('动森ID长度不符合要求')),
-			position: Joi.string().allow(''),
-			startDate: Joi.number().allow(null),
-			avatar: Joi.string().allow(''),
-			signature: Joi.string().allow(''),
-			roles: Joi.array().items(Joi.string().valid('admin', 'normal')).error(new Error('角色值非法')),
-			state: Joi.number().valid(0, 1).required().error(new Error('状态值非法')),
+		_id: Joi.string().allow(''),
+		username: Joi.string()
+				.min(2)
+				.max(12)
+				.required()
+				.error(new Error('用户名不符合验证规则')),
+		email: Joi.string().email().error(new Error('邮箱格式不符合要求')).allow(''),
+		password: user._id ? Joi.string() : Joi.string()
+				.regex(/^[a-zA-Z0-9]{3,30}$/)
+				.required()
+				.error(new Error('密码格式不符合要求')),
+		nickname: Joi.string().allow(''),
+		islandName: Joi.string().allow(''),
+		gameId: Joi.string().allow('').max(17).error(new Error('动森ID长度不符合要求')),
+		position: Joi.string().allow(''),
+		startDate: Joi.number().allow(null),
+		avatar: Joi.string().allow(''),
+		signature: Joi.string().allow(''),
+		roles: Joi.array().items(Joi.string().valid('admin', 'normal')).error(new Error('角色值非法')),
+		state: Joi.number().valid(0, 1).required().error(new Error('状态值非法')),
+		created_time: Joi.number().allow(null)
 	}
 	return Joi.validate(user, schema)
 }

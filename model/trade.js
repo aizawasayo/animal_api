@@ -7,7 +7,10 @@ const tradeSchema = new mongoose.Schema({
     required: [true, '发布者不能为空']
   },
   exchangeType: { type: String, required: true }, // 交易类型
-  validTime: Number, // 有效时间
+  validTime: { // 有效时间
+    type: Number,
+    maxlength: 10
+  }, 
   isLineup: Boolean, // 是否排队模式
   isPublic: Boolean, // 是否公开
   isAuto: Boolean, // 自动叫号

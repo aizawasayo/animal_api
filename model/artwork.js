@@ -4,7 +4,7 @@ const artworkSchema = new mongoose.Schema({
   name: {
     type: String,
     maxlength: 16,
-    minlength: 2,
+    minlength: 4,
     required: [true, '艺术品名称不能为空'],
   },
   engName: String,

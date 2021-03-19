@@ -17,7 +17,7 @@ const guideSchema = new mongoose.Schema({
   content: String, // 文章内容
   status: { // 是否发布，published：已发布 / draft：未发布（草稿）/ deleted：已删除
     type: String,
-    default: '未发布'
+    default: 'draft'
   },
   display_time: { // 前台展示时间
     type: Number,
