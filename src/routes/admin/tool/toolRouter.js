@@ -13,27 +13,23 @@ import toolList from './toolList'
 router.get('/', toolList)
 
 // 实时搜索工具名
-router.get('/search', async (req, res) => {
-  const response = await searchAll(req.query.name, Tool)
-  res.json(response) 
+router.get('/search', (req, res, next) => {
+  searchAll({ req, res, next }, Tool)
 })
 
 // 工具添加功能路由
-router.post('/', async (req, res) => {
-	const response = await AddData(req.body, Tool)
-  res.json(response) 
+router.post('/', (req, res, next) => {
+	AddData({ req, res, next }, Tool)
 })
 
 // 工具查询功能路由
-router.get('/:id', async (req, res) => {
-	const response = await getById(req.params.id, Tool)
-  res.json(response) 
+router.get('/:id', (req, res, next) => {
+	getById({ req, res, next }, Tool)
 })
 
 // 工具删除功能路由
-router.delete('/:id', async (req, res) => {
-  const response = await deleteById(req.params.id, Tool)
-  res.json(response) 
+router.delete('/:id', (req, res, next) => {
+  deleteById({ req, res, next }, Tool) 
 })
 
 export default router

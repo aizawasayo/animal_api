@@ -1,7 +1,7 @@
 import Guide from '../../../../model/guide'
 import getList from '../../common/getList'
 
-export default async (req, res) => {
+export default (req, res, next) => {
   const {
     page,
     pageSize,
@@ -21,12 +21,15 @@ export default async (req, res) => {
   if (status) {
     condition['status'] = status
   }
-  const sortCondition = {
+  let sortCondition = {
     created_time: 1
   }
   if (sort) sortCondition = JSON.parse(sort)
 
-  const response = await getList({
+  getList({
+    req,
+    res,
+    next,
 		page,
 		pageSize,
 		condition,
@@ -34,5 +37,4 @@ export default async (req, res) => {
 		Model: Guide,
     ref: 'author'
 	})
-	res.json(response)
 }

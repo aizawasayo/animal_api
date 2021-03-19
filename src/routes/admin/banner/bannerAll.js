@@ -1,10 +1,7 @@
 import Banner from '../../../../model/banner'
 
-export default async (req, res) => {
-	const {
-		state,
-		sort
-	} = req.query
+export default async (req, res, next) => {
+	const { state, sort} = req.query
 
 	let condition = {
 		"state": state
@@ -21,7 +18,7 @@ export default async (req, res) => {
 			code: 400,
 			message: err.message
 		})
-		res.json({
+		res.status(200).json({
 			code: 200,
 			message: '列表获取成功',
 			data: banners

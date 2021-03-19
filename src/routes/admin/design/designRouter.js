@@ -12,21 +12,18 @@ import designList from './designList'
 router.get('/', designList)
 
 // 添加功能路由
-router.post('/', async (req, res) => {
-	const response = await AddData(req.body, Design, { addTime: true })
-  res.json(response) 
+router.post('/', (req, res, next) => {
+	AddData({ req, res, next }, Design, { addTime: true })
 })
 
 // 查询功能路由
-router.get('/:id', async (req, res) => {
-  const response = await getById(req.params.id, Design, 'user')
-  res.json(response) 
+router.get('/:id', (req, res, next) => {
+  getById({ req, res, next }, Design, 'user')
 })
 
 // 删除功能路由
-router.delete('/:id', async (req, res) => {
-	const response = await deleteById(req.params.id, Design)
-  res.json(response) 
+router.delete('/:id', (req, res, next) => {
+	deleteById({ req, res, next }, Design)
 })
 
 export default router

@@ -1,20 +1,14 @@
 import Option from '../../../../model/option'
 
-export default async (req, res) => {
-	const {
-		type,
-		sort
-	} = req.query
+export default async (req, res, next) => {
+	const { type, sort } = req.query
 
 	let sortCondition = {
-		//name: 1
 		orderNum: 1
 	}
-
 	let condition = {
 		"type": type
 	}
-
 	if (sort) sortCondition = JSON.parse(sort)
 
 	await Option.find(condition).sort(sortCondition).collation({

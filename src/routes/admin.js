@@ -4,14 +4,20 @@ const admin = express.Router()
 import multer from 'multer';
 
 // 临时上传目录
-let uploadUrl = multer({
-  dest: 'public/uploads/'
+const uploadUrl = multer({
+  dest: 'public/uploads/',
 });
 
 import login from './admin/login'
 import logout from './admin/logout'
 import upload from './admin/upload'
 import uploadMult from './admin/uploadMult'
+
+// 提供用户头像上传服务, 单独上传
+admin.post('/single/upload', uploadUrl.single('avatar'), upload)
+
+// 提供批量上传服务
+admin.post('/upload', uploadUrl.array('photoSrc', 10), uploadMult)
 
 admin.get('/', function (req, res, next) {
   res.send('respond with a resource');
@@ -28,14 +34,6 @@ admin.post('/logout', logout)
 // 用户路由
 import userRouter from './admin/user/userRouter'
 admin.use('/user', userRouter)
-
-// 提供用户头像上传服务, 单独上传
-admin.post('/user/upload', uploadUrl.single('avatar'), upload)
-
-
-// 提供批量上传服务
-// admin.post('/upload', uploadUrl.single('photoSrc'), upload)
-admin.post('/upload', uploadUrl.array('photoSrc', 10), uploadMult)
 
 // 岛民路由
 import islanderRouter from './admin/islander/islanderRouter'

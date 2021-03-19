@@ -12,21 +12,18 @@ import tradeList from './tradeList'
 router.get('/', tradeList)
 
 // 交易添加功能路由
-router.post('/', async (req, res) => {
-	const response = await AddData(req.body, Trade, { key: ['detail'], addTime: true, uniqueName: '内容' })
-  res.json(response) 
+router.post('/', (req, res, next) => {
+	AddData({ req, res, next }, Trade, { key: ['detail'], addTime: true, uniqueName: '内容' })
 })
 
 // 交易查询功能路由
-router.get('/:id', async (req, res) => {
-	const response = await getById(req.params.id, Trade, 'user')
-  res.json(response) 
+router.get('/:id', (req, res, next) => {
+	getById({ req, res, next }, Trade, 'user')
 })
 
 // 交易删除功能路由
-router.delete('/:id', async (req, res) => {
-	const response = await deleteById(req.params.id, Trade)
-  res.json(response) 
+router.delete('/:id', (req, res, next) => {
+	deleteById({ req, res, next }, Trade)
 })
 
 export default router

@@ -4,7 +4,7 @@ import getList from '../../common/getList'
 // 导入mongoose分页功能模块
 // import pagination from 'mongoose-sex-page'
 
-export default async (req, res) => {
+export default (req, res, next) => {
 	const {
 		page,
 		pageSize,
@@ -38,12 +38,14 @@ export default async (req, res) => {
 	}
 	if (sort) sortCondition = JSON.parse(sort)
 	
-	const response = await getList({
+	getList({
+		req,
+		res,
+		next,
 		page,
 		pageSize,
 		condition,
 		sortCondition,
 		Model: Islander
 	})
-	res.json(response)	
 }

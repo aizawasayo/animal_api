@@ -1,7 +1,7 @@
 import TradeComment from '../../../model/trade_comment'
 import getList from '../common/getList'
 
-export default async (req, res) => {
+export default (req, res, next) => {
   const {
     page,
     pageSize,
@@ -22,13 +22,15 @@ export default async (req, res) => {
   }
   if (sort) sortCondition = JSON.parse(sort)
   
-  const response = await getList({
-		page,
+  getList({
+		req,
+    res,
+    next,
+    page,
     pageSize,
     condition,
     sortCondition,
     Model: TradeComment,
     ref: 'uid'
 	})
-	res.json(response)
 }

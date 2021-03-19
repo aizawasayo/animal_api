@@ -13,27 +13,23 @@ import recipeList from './recipeList'
 router.get('/', recipeList)
 
 // 实时搜索配方名
-router.get('/search', async (req, res) => {
-  const response = await searchAll(req.query.name, Recipe)
-  res.json(response) 
+router.get('/search', (req, res, next) => {
+  searchAll({ req, res, next }, Recipe)
 })
 
 // 配方添加功能路由
-router.post('/', async (req, res) => {
-	const response = await AddData(req.body, Recipe)
-  res.json(response) 
+router.post('/', (req, res, next) => {
+	AddData({ req, res, next }, Recipe)
 })
 
 // 配方查询功能路由
-router.get('/:id', async (req, res) => {
-  const response = await getById(req.params.id, Recipe)
-  res.json(response) 
+router.get('/:id', (req, res, next) => {
+  getById({ req, res, next }, Recipe)
 })
 
 // 配方删除功能路由
-router.delete('/:id', async (req, res) => {
-  const response = await deleteById(req.params.id, Recipe)
-  res.json(response) 
+router.delete('/:id', (req, res, next) => {
+  deleteById({ req, res, next }, Recipe)
 })
 
 export default router

@@ -1,35 +1,40 @@
-export default (pid, Model) => {
-  let id = pid
+export default async (routerParams, Model) => {
+  const { req, res, next } = routerParams
+  let id = req.params.id
   if (id.indexOf(',') > 0) { // 批量删除    
     id = id.split(',')
-    return Model.deleteMany({
-      _id: {
-        $in: id
+    try {
+      const response = await Model.deleteMany({ _id: { $in: id } }).exec()
+      if(response.ok && response.deletedCount) {
+        res.json({
+          code: 200,
+          message: '批量删除成功'
+        })
+      } else{
+        res.json({
+          code: 400,
+          message: '删除失败'
+        })
       }
-    }).exec().then(res => {
-      if (res.ok) return {
-        code: 200,
-        message: '批量删除成功'
-      }
-    }).catch(err => {
-      return {
-        code: 400,
-        message: '删除失败' + err.message
-      }
-    })
+    } catch (err) {
+      next(err)
+    }
   } else {
-    return Model.deleteOne({
-      _id: id
-    }).exec().then(res => {
-      if (res.ok) return {
-        code: 200,
-        message: '删除成功'
+    try {
+      const response = await Model.deleteOne({ _id: { $in: id } }).exec()
+      if(response.ok && response.deletedCount) {
+        res.json({
+          code: 200,
+          message: '批量删除成功'
+        })
+      } else{
+        res.json({
+          code: 400,
+          message: '删除失败'
+        })
       }
-    }).catch(err => {
-      return {
-        code: 400,
-        message: '删除失败' + err.message
-      }
-    })
+    } catch (err) {
+      next(err)
+    }
   }
 }

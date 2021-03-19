@@ -17,9 +17,8 @@ import pswModify from './pswModify'
 router.get('/', userList)
 
 // 实时搜索用户名字
-router.get('/search', async (req, res) => {
-  const response = await searchAll(req.query.username, User, 'username')
-  res.json(response) 
+router.get('/search', (req, res, next) => {
+  searchAll({ req, res, next }, User, 'username')
 })
 
 // 用户添加功能路由
@@ -29,15 +28,13 @@ router.post('/', userAdd)
 router.put('/:id', userEdit)
 
 // 用户查询功能路由
-router.get('/:id', async (req, res) => {
-	const response = await getById(req.params.id, User)
-  res.json(response) 
+router.get('/:id', (req, res, next) => {
+  getById({ req, res, next }, User)
 })
 
 // 删除用户信息
-router.delete('/:id', async (req, res) => {
-	const response = await deleteById(req.params.id, User)
-  res.json(response) 
+router.delete('/:id', (req, res, next) => {
+	deleteById({ req, res, next }, User)
 })
 
 // 用户修改密码路由

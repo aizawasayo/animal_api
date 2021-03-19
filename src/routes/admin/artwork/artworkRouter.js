@@ -11,28 +11,19 @@ import artworkList from './artworkList'
 // 分页列表路由
 router.get('/', artworkList)
 
-// 添加功能路由
-router.post('/', async (req, res) => {
-	const response = await AddData(req.body, Artwork)
-  res.json(response) 
+// 添加/编辑功能路由
+router.post('/', (req, res, next) =>{
+  AddData({ req, res, next }, Artwork)
 })
 
 // 查询功能路由
-router.get('/:id', async (req, res) => {
-  const response = await getById(req.params.id, Artwork)
-  res.json(response) 
+router.get('/:id', (req, res, next) => {
+  getById({ req, res, next }, Artwork)
 })
 
-// 编辑功能路由
-// router.put('/:id', async (req, res) => {
-// 	const response = await AddData(req.body, Artwork)
-//   res.json(response) 
-// })
-
 // 删除功能路由
-router.delete('/:id', async (req, res) => {
-	const response = await deleteById(req.params.id, Artwork)
-  res.json(response) 
+router.delete('/:id', (req, res, next) => {
+	deleteById({ req, res, next }, Artwork)
 })
 
 export default router

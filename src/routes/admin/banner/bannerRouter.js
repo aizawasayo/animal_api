@@ -17,21 +17,18 @@ router.get('/', bannersByPage)
 router.get('/list', bannerAll)
 
 // 焦点图添加功能路由
-router.post('/', async (req, res) => {
-	const response = await AddData(req.body, Banner, { key: ['title'], addTime: true, uniqueName: '标题' })
-  res.json(response) 
+router.post('/', (req, res, next) => {
+	AddData({ req, res, next }, Banner, { key: ['title'], addTime: true, uniqueName: '标题' }) 
 })
 
 // 焦点图查询功能路由
-router.get('/:id', async (req, res) => {
-  const response = await getById(req.params.id, Banner)
-  res.json(response) 
+router.get('/:id', (req, res, next) => {
+  getById({ req, res, next }, Banner) 
 })
 
 // 删除焦点图
-router.delete('/:id', async (req, res) => {
-	const response = await deleteById(req.params.id, Banner)
-  res.json(response) 
+router.delete('/:id', (req, res, next) => {
+	deleteById({ req, res, next }, Banner)
 })
 
 export default router

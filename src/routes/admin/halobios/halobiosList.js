@@ -1,7 +1,7 @@
 import Halobios from '../../../../model/halobios'
 import getList from '../../common/getList'
 
-export default async (req, res) => { 
+export default (req, res, next) => { 
 	const {
 		page,
 		pageSize,
@@ -32,12 +32,14 @@ export default async (req, res) => {
 	}	
   if (sort) sortCondition = JSON.parse(sort)
     
-  const response = await getList({
+  getList({
+		req,
+		res,
+		next,
 		page,
 		pageSize,
 		condition,
 		sortCondition,
 		Model: Halobios
-	})
-	res.json(response)	
+	})	
 }

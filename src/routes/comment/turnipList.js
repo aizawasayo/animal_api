@@ -1,7 +1,7 @@
 import TurnipComment from '../../../model/turnip_comment'
 import getList from '../common/getList'
 
-export default async (req, res) => {
+export default async (req, res, next) => {
   const {
     page,
     pageSize,
@@ -21,7 +21,10 @@ export default async (req, res) => {
   }
   if (sort) sortCondition = JSON.parse(sort)
 
-  const response = await getList({
+  getList({
+    req, 
+    res, 
+    next,
 		page,
     pageSize,
     condition,
@@ -29,5 +32,4 @@ export default async (req, res) => {
     Model: TurnipComment,
     ref: 'uid'
 	})
-	res.json(response)
 }

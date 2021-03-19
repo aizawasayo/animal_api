@@ -1,8 +1,8 @@
 import Turnip from '../../../../model/turnip'
 
-export default async (req, res) => {
+export default async (req, res, next) => {
 	if (req.body._id) { // 修改数据
-		await Turnip.findByIdAndUpdate(req.body._id, req.body, (err, data) => {
+		await Turnip.findByIdAndUpdate(req.body._id, req.body).exec((err, data) => {
 			if (err) return res.json({
 				code: 400,
 				message: err.message
@@ -23,20 +23,19 @@ export default async (req, res) => {
 				code: 400,
 				message: '您发布的信息还未到期，请勿重复添加'
 			})       
-		} else {
-			req.body.created_time = Date.parse(new Date()) / 1000
-			try {
-				await Turnip.create(req.body)
-				res.json({
-					code: 200,
-					message: '添加成功'
-				})
-			} catch(err) {
-				res.json({
-					code: 400,
-					message: err.message
-				})
-			}
+		} 
+		req.body.created_time = Date.parse(new Date()) / 1000
+		try {
+			await Turnip.create(req.body)
+			res.json({
+				code: 200,
+				message: '添加成功'
+			})
+		} catch(err) {
+			res.json({
+				code: 400,
+				message: err.message
+			})
 		}
 	}
 }

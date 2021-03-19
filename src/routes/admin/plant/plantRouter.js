@@ -13,27 +13,23 @@ import plantList from './plantList'
 router.get('/', plantList)
 
 // 实时搜索植物名
-router.get('/search', async (req, res) => {
-  const response = await searchAll(req.query.name, Plant)
-  res.json(response) 
+router.get('/search', (req, res, next) => {
+  searchAll({ req, res, next }, Plant) 
 })
 
 // 植物添加功能路由
-router.post('/', async (req, res) => {
-	const response = await AddData(req.body, Plant)
-  res.json(response) 
+router.post('/', (req, res, next) => {
+	AddData({ req, res, next }, Plant) 
 })
 
 // 植物查询功能路由
-router.get('/:id', async (req, res) => {
-  const response = await getById(req.params.id, Plant)
-  res.json(response) 
+router.get('/:id', (req, res, next) => {
+  getById({ req, res, next }, Plant)
 })
 
 // 植物删除功能路由
-router.delete('/:id', async (req, res) => {
-  const response = await deleteById(req.params.id, Plant)
-  res.json(response) 
+router.delete('/:id', (req, res, next) => {
+  deleteById({ req, res, next }, Plant)
 })
 
 export default router

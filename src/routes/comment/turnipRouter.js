@@ -12,21 +12,18 @@ import commentList from './turnipList'
 router.get('/', commentList)
 
 // 菜市场评论添加路由
-router.post('/', async (req, res) => {
-	const response = await AddData(req.body, TurnipComment, { key: false, addTime: true })
-  res.json(response) 
+router.post('/', (req, res, next) => {
+	AddData({ req, res, next }, TurnipComment, { key: false, addTime: true })
 })
 
 // 菜市场评论查询路由
-router.get('/:id', async (req, res) => {
-  const response = await getById(req.params.id, TurnipComment)
-  res.json(response) 
+router.get('/:id', (req, res, next) => {
+  getById({ req, res, next }, TurnipComment)
 })
 
 // 删除菜市场评论
-router.delete('/:id', async (req, res) => {
-  const response = await deleteById(req.params.id, TurnipComment)
-  res.json(response) 
+router.delete('/:id', (req, res, next) => {
+  deleteById({ req, res, next }, TurnipComment)
 })
 
 
