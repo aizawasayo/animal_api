@@ -19,6 +19,7 @@ export default async (routerParams, Model, props) => {
   const addItem = async () => {
     if (addTime) data.created_time = Date.parse(new Date()) / 1000
     try {
+      // 返回值 docs : Array|Object （返回成功创建的数据文档/文档数组）
       await Model.create(data)
       res.json({
         code: 200,
@@ -34,7 +35,8 @@ export default async (routerParams, Model, props) => {
   }
   if (data._id) { // 修改数据
     try {
-		  await Model.findByIdAndUpdate(data._id, data).exec()
+      // 返回值： doc: Object 默认是更新之前的文档，如果在options传了new: true，则是更新之后的文档。没查到匹配的则是null
+      await Model.findByIdAndUpdate(data._id, data).exec()
       res.json({
 				code: 200,
         message: '修改成功'

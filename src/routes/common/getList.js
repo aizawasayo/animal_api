@@ -21,6 +21,7 @@ export default (props) => {
   })
   .then(total => {
     const message = total ? '列表查询成功' : '未查询到符合条件的数据'
+    // 返回值 docs: Array （没有符合条件的是 []）
     Model.find(condition).skip(skip).limit(limit).populate(refKey).sort(sortCondition).collation({
       locale: 'zh'
     }).exec().then(response => {

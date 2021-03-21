@@ -3,6 +3,7 @@ export default async (routerParams, Model, ref) => {
   const id = req.params.id
   const refKey = ref ? ref : ''
   try {
+    // 返回值 doc: Object （没有符合条件的是 null）
     const doc = await Model.findById(id).populate(refKey).exec()
     res.json({
       code: 200,

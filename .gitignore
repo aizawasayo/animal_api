@@ -4,6 +4,7 @@ node_modules/
 config/
 # production  打包文件
 dist/
+package-lock.json
 
 # Editor directories and files
 .idea

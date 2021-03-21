@@ -12,7 +12,7 @@ export default async (req, res, next) => {
     })
   }
   //如果查询到了用户，user变量的值是对象类型，其中存储的是用户信息
-  //如果没有查询到用户，user变量为空
+  //如果没有查询到用户，user变量为 null
   const user = await User.findOne({
     username: username,
   })
