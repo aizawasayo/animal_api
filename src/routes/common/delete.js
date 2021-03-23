@@ -25,7 +25,7 @@ export default async (routerParams, Model) => {
       if(response.ok && response.deletedCount) {
         res.json({
           code: 200,
-          message: '批量删除成功'
+          message: '删除成功'
         })
       } else{
         res.json({
