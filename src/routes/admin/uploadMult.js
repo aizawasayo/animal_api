@@ -16,7 +16,7 @@ export default (req, res, next) => {
 		fs.renameSync(path.join(process.cwd(), "/" + file.path), path.join(process.cwd(), targetPath))
 		//获取文件基本信息
 		fileInfo.mimetype = file.mimetype;
-		fileInfo.name = file.originalname;
+		fileInfo.name = file.originalname.length > 20 ? file.originalname.substring(0,20) + '...' : file.originalname
 		//fileInfo.size = file.size;
 		fileInfo.path = '/' + targetPath;
 		fileInfo.url = "http://106.54.168.208:1016/" + targetPath

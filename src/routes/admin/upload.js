@@ -4,11 +4,12 @@ import fs from 'fs'
 export default (req, res, next) => {
 	// 路由处理程序和中间件内部的同步代码中发生的错误不需要任何额外的工作。
 	// 如果同步代码引发错误，则Express将捕获并处理该错误。
-	const fileExtArray = req.file.originalname.split(".");
+	const file = req.file
+	const fileExtArray = file.originalname.split(".");
 	const ext = fileExtArray[fileExtArray.length - 1];
-	const targetPath = req.file.path + "." + ext;
-	const targetName = req.file.originalname;
-	fs.rename(path.join(process.cwd(), "/" + req.file.path), path.join(process.cwd(), targetPath), function (err) {
+	const targetPath = file.path + "." + ext;
+	const targetName = file.originalname.length > 20 ? file.originalname.substring(0,20) + '...' : file.originalname;
+	fs.rename(path.join(process.cwd(), "/" + file.path), path.join(process.cwd(), targetPath), function (err) {
 		if (err) {
 			// 对于从路由处理程序和中间件调用的异步函数返回的错误，
 			// 必须将它们传递给next()函数，在这Express会捕获并处理它们。例如：
