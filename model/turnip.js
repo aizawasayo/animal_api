@@ -24,7 +24,7 @@ const turnipSchema = new mongoose.Schema({
   contact: String, // 联系方式
   contactDetail: String, // 详细联系方式
   detail: String, // 上岛说明
-  comments: Number, // 评论数量
+  comments: Array, // 评论数量，存评论id
   created_time: { // 新增时间
     type: Number,
     maxlength: 10

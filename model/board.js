@@ -11,7 +11,8 @@ const boardSchema = new mongoose.Schema({
     type: String,
     required: [true, '内容不能为空']
   }, //内容
-  comments: Number, // 评论数量
+  comments: Array, // 评论数量，存评论id
+  likes: Array, // 点赞数量, 存用户id 不可重复
   icon: String, // 话题专属图标
   color: String, // 话题专属颜色
   photoSrc: Array, // 图片

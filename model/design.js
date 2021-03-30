@@ -13,6 +13,8 @@ const designSchema = new mongoose.Schema({
   type: { type: String, required: [true, '类型不能为空'] }, // 类型，图案/衣服/帽子
   content: String, // 简介
   photoSrc: Array, // 图片
+  comments: Array, // 评论数量，存评论id
+  likes: Array, // 点赞数量, 存用户id 不可重复
   created_time: { // 新增时间
     type: Number,
     maxlength: 10

@@ -11,6 +11,7 @@ export default (req, res, next) => {
 		query,
 		sex,
 		monthStr,
+		birth,
 		breed,
 		character,
 		voice,
@@ -22,7 +23,7 @@ export default (req, res, next) => {
 	let condition = {
 			"name": nameReg
 	}
-	const filterList = [{sex}, {monthStr}, {breed}, {character}, {hobby}, {voice}]
+	const filterList = [{sex}, {monthStr}, {birth}, {breed}, {character}, {hobby}, {voice}]
 	filterList.forEach(item => {
 		if(item) {
 			const ckey = Object.keys(item)[0]

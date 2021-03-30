@@ -20,13 +20,13 @@ export default async (routerParams, Model, props) => {
     if (addTime) data.created_time = Date.parse(new Date()) / 1000
     try {
       // 返回值 docs : Array|Object （返回成功创建的数据文档/文档数组）
-      await Model.create(data)
+      const doc = await Model.create(data)
       res.json({
         code: 200,
-        message: '添加成功' 
+        message: '添加成功',
+        data: doc
       })
     } catch(err) {
-      console.log(err)
       res.json({
         code: 400,
         message: '添加失败'+ err.message

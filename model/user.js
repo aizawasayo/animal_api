@@ -51,6 +51,7 @@ const userSchema = new mongoose.Schema({
 		type: Number,
 		maxlength: 10
 	},
+	favorites: Array, // 收藏
 })
 
 // 创建集合
@@ -96,7 +97,8 @@ const validateUser = (user) => {
 		signature: Joi.string().allow(''),
 		roles: Joi.array().items(Joi.string().valid('admin', 'normal')).error(new Error('角色值非法')),
 		state: Joi.number().valid(0, 1).required().error(new Error('状态值非法')),
-		created_time: Joi.number().allow(null)
+		created_time: Joi.number().allow(null),
+		favorites: Joi.array().allow(null)
 	}
 	return Joi.validate(user, schema)
 }

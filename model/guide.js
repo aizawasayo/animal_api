@@ -30,7 +30,8 @@ const guideSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
-  comments: Number, // 评论数量
+  comments: Array, // 评论数量，存评论id
+  likes: Array, // 点赞数量, 存用户id 不可重复
   photoSrc: String, // 主图
   created_time: { // 新增时间
     type: Number,

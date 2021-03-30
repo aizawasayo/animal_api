@@ -7,7 +7,6 @@ module.exports = async (req, res, next) => {
     // 生成随机字符串
     const created_time = Date.parse(new Date()) / 1000
     const data = Object.assign({ created_time }, req.body)
-    console.log(data)
     await validateUser(data)
     const user = await User.findOne({ // 查看用户名有无重复
       username: data.username
@@ -33,7 +32,6 @@ module.exports = async (req, res, next) => {
       message: '用户新增成功'
     })
   } catch (err) { //验证没有通过
-    console.log('1验证出错',err)
     res.json({
       code: 400,
       message: err.message,
